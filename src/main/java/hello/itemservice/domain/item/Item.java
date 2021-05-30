@@ -13,5 +13,8 @@ public class Item {
     private Integer quantity;
 
     public Item(String itemA, int i, int i1) {
+        this.itemName = itemA;
+        this.price = i;
+        this.quantity = i1;
     }
 }
