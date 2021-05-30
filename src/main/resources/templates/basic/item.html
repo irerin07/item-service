@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <link th:href="@{css/bootstrap.min.css}"
-          href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css"
+          th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 </head>
 <body>
 <div class="container">
@@ -35,13 +35,15 @@
         <div class="col">
             <button class="w-100 btn btn-primary btn-lg"
                     onclick="location.href='editForm.html'"
-                    th:onclick="|location.href='@{/basic/items/{itemId}/edit(itemId=${item.id})}'|" type="button">상품 수정
+                    th:onclick="|location.href='@{/basic/items/{itemId}/edit(itemId=${item.id})}'|"
+                    type="button">상품 수정
             </button>
         </div>
         <div class="col">
             <button class="w-100 btn btn-secondary btn-lg"
                     onclick="location.href='items.html'"
-                    th:onclick="|localtion.href='@{/basic/items}'|" type="button">목록으로
+                    th:onclick="|location.href='@{/basic/items}'|"
+                    type="button">목록으로
             </button>
         </div>
     </div>
