@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
@@ -85,7 +86,7 @@ public class BasicItemController {
         return "basic/item";
     }
 
-    @PostMapping("/add")
+//    @PostMapping("/add")
     public String saveV4(Item item) {
         //ModelAttribute는 지정된 모델 객체를 만들어 주고 자동으로 model에 지정된 이름("item")으로 넣어준다.
         //이름을 따로 지정하지 않으면 efault로 지정된 모델 객체의 이름으로 "item" model에 넣어준다.
@@ -96,6 +97,32 @@ public class BasicItemController {
 //        model.addAttribute("item", item);
 
         return "basic/item";
+    }
+
+//    @PostMapping("/add")
+    public String saveV5(Item item) {
+        //ModelAttribute는 지정된 모델 객체를 만들어 주고 자동으로 model에 지정된 이름("item")으로 넣어준다.
+        //이름을 따로 지정하지 않으면 efault로 지정된 모델 객체의 이름으로 "item" model에 넣어준다.
+        //ModelAttribute도 생략 가능하다.
+
+        itemRepository.save(item);
+
+//        model.addAttribute("item", item);
+
+        return "redirect:/basic/items/" + item.getId();
+    }
+
+    @PostMapping("/add")
+    public String saveV6(Item item, RedirectAttributes redirectAttributes) {
+        //ModelAttribute는 지정된 모델 객체를 만들어 주고 자동으로 model에 지정된 이름("item")으로 넣어준다.
+        //이름을 따로 지정하지 않으면 efault로 지정된 모델 객체의 이름으로 "item" model에 넣어준다.
+        //ModelAttribute도 생략 가능하다.
+
+        Item save = itemRepository.save(item);
+
+        redirectAttributes.addAttribute("itemId", save.getId());
+        redirectAttributes.addAttribute("status" ,true);
+        return "redirect:/basic/items/{itemId}";
     }
 
     @GetMapping("/{itemId}/edit")
